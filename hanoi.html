@@ -1,0 +1,120 @@
+<body>
+<head>
+	<script src="game-logic.js"></script>
+<style>
+body{
+	position: relative;
+	padding: 0;
+	text-align: center;
+	font-family: sans-serif;
+	background: #f4ebbe;
+	color: #555;
+}
+#instructions{
+	position: absolute;
+	right: 10%;
+	top: 0;
+	width: 270px;
+	padding: 2em;
+	background: #8ba6a9;
+	color: #f4ebbe;
+	z-index: 10;
+	text-align: left;
+	display: none;
+}
+#instructions.active{
+	display: block;
+}
+#close{
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	z-index: 20;
+	cursor: pointer;
+}
+header{
+	background: #cacc90;
+	padding: 3em;
+}
+h1{
+	font-weight: bold;
+	text-transform: uppercase;
+	padding: 0;
+	margin: 0;
+}
+#wrapper{
+	background: #f4ebbe;
+	padding: 2em 0 ;
+}
+#wrapper:before, #wrapper:after{
+	clear: both;
+	content: " ";
+	display: table;
+}
+.tower{width:30%; float: left; margin-right:2%;  height:300px; background:url(tower.png) no-repeat center bottom; background-size: contain; text-align: center;}
+div{
+	box-sizing: border-box;
+}
+.disc{
+	display: block;  margin: 0 auto;  height: 50px; background: #8ba6a9; color: #fff; text-align: center; border: 1px solid #666; cursor: pointer;
+}
+#d1{
+	width:100px;
+}
+#d2{
+	width:150px;
+}
+#d3{
+	width:200px;
+}
+div[data-total-elements="1"]{
+	padding-top:233px;
+}
+div[data-total-elements="2"]{
+	padding-top:183px;
+}
+div[data-total-elements="3"]{
+	padding-top:133px;
+}
+#btn-wrapper{
+	padding:2em;
+}
+a.btn{
+	text-decoration: none;
+	display: inline-block;
+	background: #dd4433;
+	color: #a7cecb;
+	border-radius: 10px;
+	padding: .5em 1.5em;
+	font-size: 1.2em;
+}
+a.btn:hover{
+	color: #eee;
+}
+</style>
+</head>
+<html>
+	<header><h1>Towers of Hanoi</h1></header>
+<div id="wrapper">
+
+	<div id="t1" class="tower" data-smallest="1" ondrop="drop(event)" ondragover="allowDrop(event)" data-total-elements="3" >
+		<div id="d1" class="disc" dataval="1" draggable="true" ondragstart="drag(event)" >&nbsp;</div>
+	<div id="d2" class="disc" dataval="2" draggable="false" ondragstart="drag(event)" >&nbsp;</div>
+	<div id="d3" class="disc" dataval="3" draggable="false" ondragstart="drag(event)" >&nbsp;</div>
+	</div>
+	<div id="t2" class="tower" data-smallest="0" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+	<div id="t3" class="tower" data-smallest="0" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+
+	
+</div>
+
+<div id="btn-wrapper">
+<a href="hanoi.html" class="btn">reset</a> <a id="directions" href="#" onclick="showDirections()" class="btn">need help?</a>
+</div>
+<div id="instructions">
+	<div id="close" onclick="hideDirections()">&times;</div>
+	<h2>The Objective</h2>
+	<p>The object of this puzzle is move discs from the left tower to the right tower in as few moves as possible. Click and drag the discs from one tower to another.</p>
+</div>
+</html>
+</body>
