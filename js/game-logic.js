@@ -1,16 +1,16 @@
+var score=0;
+
 function showDirections(){
 	document.getElementById("instructions").classList.add("active");
 }
+
 function hideDirections(){
 	document.getElementById("instructions").classList.remove("active");
 }
 
-function init(){
-	t1_arr=[ {label:'d1',val:1},{label:'d2',val:2},{label:'d3',val:3} ];
-	t2_arr=[];
-	t3_arr=[];
-}
 function evalTowers(){
+	score++;
+	document.getElementById('scoreText').textContent = score;
 //loop through each tower allow only first to be draggable
 for (var i=1;i<=3;i++){
 	var tower = document.getElementById('t'+i);
@@ -34,12 +34,24 @@ for (var i=1;i<=3;i++){
 		tower.setAttribute('data-total-elements',elCnt);
 	}
 	///game over chekc
-	if(document.getElementById('t3').getAttribute("data-smallest")=="1"){
-		console.log('game over');
+	if(elCnt==3 && document.getElementById('t3').getAttribute("data-smallest")=="1"){
+			//small timeout used bc Chrome showing window before visual representation of finalized state
+			setTimeout(function(){ 
+				var ask = window.confirm("Congrats, you solved the puzzle in "+score+" moves. Would you like to play again?");
+		if (ask) {
+			document.location.href = "hanoi.html";
+		}
+		}, 50);
+		
 	}
-
 }
 
+}
+function checkdraggable(ev){
+	ev.preventDefault();
+	if(ev.target.getAttribute('draggable')){
+		alert('You may only drag the top most disc in any tower.');
+	}
 }
 
 function allowDrop(ev) {
@@ -56,7 +68,6 @@ function drop(ev) {
 
     //get droptarget smallest number
     var smallest = a.getAttribute('data-smallest');
-    console.log('drop ev: '+a.id +' smallest: '+smallest);
     var data = ev.dataTransfer.getData("text");
     
     //check if 
@@ -65,18 +76,9 @@ function drop(ev) {
     var calcVal = a.getAttribute("dataval");
 
     if(smallest > calcVal || smallest ==0 ){
-    	//dropTarget.appendChild(document.getElementById(data));
-    	dropTarget.insertBefore(document.getElementById(data) , dropTarget.firstChild);
-    	
+    	dropTarget.insertBefore(document.getElementById(data) , dropTarget.firstChild);    	
     	evalTowers();
     }else{
-    	//console.log('nope');
     	alert("Only a smaller disc may be placed upon a larger disc in a tower");
     }
-    console.log(data + ' calcVal: '+calcVal +' tgt: '+dropTarget.id);
-    ;
-    console.log(calcVal);    
-
 }
-
-init();
