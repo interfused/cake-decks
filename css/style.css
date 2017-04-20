@@ -3,13 +3,192 @@ html,body{
 	margin: 0;
 }
 body{
+	background: url('../images/bg-pattern.png') #ebd9c0 ;
 	position: relative;
 	padding: 0;
 	text-align: center;
-	font-family: sans-serif;
-	background: #f4ebbe;
-	color: #555;
+	font-family: 'Cabin',sans-serif;
+	color: #5d3813;
+	font-size: 18px;
 }
+/* ANIMATIONS */
+@keyframes slideInFromLeft {
+  0% {
+  	-webkit-transform: translateX(-100%);
+    -ms-transform: translateX(-100%);
+    transform: translateX(-100%);
+  }
+  100% {
+    -webmit-transform: translateX(0);
+    -ms-transform: translateX(0);
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInFromTop {
+  0% {
+    -webmit-transform: translateY(-20%);
+    -ms-transform: translateY(-20%);
+    transform: translateY(-20%);
+  }
+  100% {
+    -webmit-transform: translateY(0);
+    -ms-transform: translateY(0);
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInFromBottom {
+  0% {
+    -webkit-transform: translateY(20%);
+    -ms-transform: translateY(20%);
+    transform: translateY(20%);
+  }
+  100% {
+    -webmit-transform: translateY(0);
+    -ms-transform: translateY(0);
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInFromRight {
+  0% {
+    -webmit-transform: translateX(100%);
+    -ms-transform: translateX(100%);
+    transform: translateX(100%);
+  }
+  100% {
+    -webmit-transform: translateX(0);
+    -ms-transform: translateX(0);
+    transform: translateX(0);
+  }
+}
+
+
+.hidden{
+	display: none;
+}
+/*   */
+button, a.btn{
+	font-family: 'Lobster', cursive;
+	background: #cd4d7e;
+	border: 3px solid #ebc6a9;
+	padding: .25em 1.5em;
+	color: #f2e7d5;
+	text-decoration: none;
+	border-radius: 100px;
+	font-size: 2em;
+	cursor: pointer;
+}
+button:hover,a.btn:hover{
+	background-color: #5d3813;
+}
+
+.container{
+	max-width: 960px;
+	margin: 0 auto;
+}
+#intro, #outro{
+	overflow: visible;
+	background: #e0af97;
+	margin-top:250px;
+	margin-bottom: 150px;
+}
+#intro:before, #intro:after,
+#outro:before, #outro:after{
+	clear: both;
+	content: " ";
+	display: block;
+}
+#intro img, #outro img{
+	display: inline-block;
+	width: 30%;
+	margin-top: -200px;
+	margin-bottom: -150px;
+	-webkit-animation: 1s ease-out 0s 1 slideInFromLeft;
+	animation: 1s ease-out 0s 1 slideInFromLeft;
+}
+#intro #content, #outro #content{
+	position: relative;
+	padding: 2em;
+	width: 66%;
+	display: inline-block;	
+}
+#intro #content p{
+	text-align: left;
+	
+}
+#intro h1, #outro h1{
+	-webkit-animation: 1s ease-out 0s 1 slideInFromTop;
+	animation: 1s ease-out 0s 1 slideInFromTop;
+}
+#intro #content p, #intro #content button,
+#outro #content p, #outro #content button, #outro #content a.btn{
+	-webkit-animation: 1s ease-out 0s 1 slideInFromBottom;
+	animation: 1s ease-out 0s 1 slideInFromBottom;
+}
+
+#outro #scoreTextFinal{
+	display: block;
+	font-size: 3em;
+	text-align: center;
+}
+
+/*** GAME SCREEN ***/
+#gameScreen{
+	padding-top: 3em;
+}
+#gameScreen #btn-wrapper{
+-webkit-animation: 1s ease-out 0s 1 slideInFromBottom;
+animation: 1s ease-out 0s 1 slideInFromBottom;
+}
+
+#helpScreen{
+	position: absolute;
+	right:0;
+	top:0;
+	z-index: 10;
+	height: 100%;
+	background-color: #cd4d7e;
+	color: #f2e7d5;
+	padding: 2em;
+	width: 25em;
+	-webkit-box-shadow: 0px 0px 5px 0px rgba(50, 50, 50, 0.75);
+-moz-box-shadow:    0px 0px 5px 0px rgba(50, 50, 50, 0.75);
+box-shadow:         0px 0px 5px 0px rgba(50, 50, 50, 0.75);
+display: none;
+}
+
+#helpScreen.animate{
+	display: block;
+	animation: 1s ease-out 0s 1 slideInFromRight;
+}
+
+#helpScreen .content{
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
+	display: none;
+}
+
+#helpScreen .content.active{
+	display: block;
+}
+#helpScreen .content p{
+	text-align: left;
+}
+#helpScreen .content h2{
+	font-weight: normal;
+	font-family: 'Lobster',cursive;
+	font-size: 2em;
+	padding: 0;
+	margin: 0;
+}
+#helpScreen .content button{
+	font-size: 1.1em;
+	margin-top: 1em;
+}
+
 #instructions{
 	position: relative;
 	/*position: absolute;
@@ -34,17 +213,16 @@ body{
 	z-index: 20;
 	cursor: pointer;
 }
-header{
-	background: #cacc90;
-	padding: 2em;
-}
+
 h1{
-	font-weight: bold;
-	text-transform: uppercase;
+	color: #cd4d7e;
+	font-weight: normal;
+	font-family: 'Lobster',cursive;
 	padding: 0;
 	margin: 0;
-	float: left;
-	font-size: 3em;
+	line-height: 1;
+	font-size: 5em;
+	text-shadow: 2px 2px 0px #f3ecd8;
 }
 #scoreWrapper{
 	font-weight: bold;
@@ -54,7 +232,8 @@ h1{
 }
 
 #wrapper{
-	background: #f4ebbe;
+	position: relative;
+	background: #e0af97;
 	padding: 2em 0 ;
 }
 .container:before, .container:after,#wrapper:before, #wrapper:after{
@@ -62,50 +241,41 @@ h1{
 	content: " ";
 	display: table;
 }
-.tower{width:30%; float: left; margin-right:2%;  height:300px; background:url(../images/tower.png) no-repeat center bottom; background-size: contain; text-align: center;}
+.tower{width:32%; float: left; margin-right:1%;  height:300px; background:url(../images/base.png) no-repeat center bottom;  text-align: center;}
 div{
 	box-sizing: border-box;
 }
 
 #scoreWrapper{
-	float: right;
-	width:100px;
-	text-align: center;
+	text-align: right;
 }
 
 .disc{
-	display: block;  margin: 0 auto;  height: 50px; background: #8ba6a9; color: #fff; text-align: center; border: 1px solid #666; cursor: pointer;
+	display: block;  margin: 0 auto;  height: 50px; background: #8ba6a9; color: #fff; text-align: center;  cursor: pointer;
+	background: url(../images/cake-texture1.png) #e5d172 no-repeat center top;
+	border-top-left-radius: 12px;
+	border-top-right-radius: 12px;
 }
 #d1{
 	width:100px;
-}
+}	
 #d2{
 	width:150px;
+	background-color: #f0e4ab;
 }
 #d3{
 	width:200px;
 }
+
 div[data-total-elements="1"]{
-	padding-top:233px;
+	padding-top:203px;
 }
 div[data-total-elements="2"]{
-	padding-top:183px;
+	padding-top:153px;
 }
 div[data-total-elements="3"]{
-	padding-top:133px;
+	padding-top:103px;
 }
 #btn-wrapper{
 	padding:2em;
-}
-a.btn{
-	text-decoration: none;
-	display: inline-block;
-	background: #dd4433;
-	color: #a7cecb;
-	border-radius: 10px;
-	padding: .5em 1.5em;
-	font-size: 1.2em;
-}
-a.btn:hover{
-	color: #eee;
 }

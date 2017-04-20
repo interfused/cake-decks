@@ -1,16 +1,31 @@
 var score=0;
 
-function showDirections(){
-	document.getElementById("instructions").classList.add("active");
+function startGame(){
+	document.getElementById('intro').classList.add('hidden');
+	document.getElementById('gameScreen').classList.remove('hidden');
+}
+function showHelp(helpID){
+
+	var a = document.getElementById("helpScreen");
+	a.classList.add("animate");
+	var b= a.getElementsByClassName('content');
+	for(i=0;i<b.length;i++){
+		b[i].classList.remove('active');
+	}
+	var b=document.getElementById(helpID);
+	console.log('b: '+b);
+	b.classList.add('active');
+	return false;
 }
 
-function hideDirections(){
-	document.getElementById("instructions").classList.remove("active");
+function hideHelp(){
+	document.getElementById("helpScreen").classList.remove("animate");
 }
 
 function evalTowers(){
 	score++;
 	document.getElementById('scoreText').textContent = score;
+	document.getElementById('scoreTextFinal').textContent = score;
 //loop through each tower allow only first to be draggable
 for (var i=1;i<=3;i++){
 	var tower = document.getElementById('t'+i);
@@ -37,20 +52,19 @@ for (var i=1;i<=3;i++){
 	if(elCnt==3 && document.getElementById('t3').getAttribute("data-smallest")=="1"){
 			//small timeout used bc Chrome showing window before visual representation of finalized state
 			setTimeout(function(){ 
-				var ask = window.confirm("Congrats, you solved the puzzle in "+score+" moves. Would you like to play again?");
-		if (ask) {
-			document.location.href = "hanoi.html";
+				//var ask = window.confirm("Congrats, you solved the puzzle in "+score+" moves. Would you like to play again?");
+				document.getElementById('gameScreen').classList.add('hidden');
+				document.getElementById('outro').classList.remove('hidden');
+			}, 50);
+
 		}
-		}, 50);
-		
 	}
-}
 
 }
 function checkdraggable(ev){
 	ev.preventDefault();
 	if(ev.target.getAttribute('draggable')){
-		alert('You may only drag the top most disc in any tower.');
+		showHelp('drag_error');
 	}
 }
 
@@ -79,6 +93,6 @@ function drop(ev) {
     	dropTarget.insertBefore(document.getElementById(data) , dropTarget.firstChild);    	
     	evalTowers();
     }else{
-    	alert("Only a smaller disc may be placed upon a larger disc in a tower");
+    	showHelp('drop_error');
     }
 }
