@@ -1,80 +1,146 @@
 <body>
-<head>
-	<link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet"> 
-	<link href="https://fonts.googleapis.com/css?family=Cabin" rel="stylesheet"> 
-	<link rel="stylesheet" type="text/css" href="css/style.css">
-	<script type="text/javascript" src="js/game-logic.js"></script>
-</head>
-<html>
-<div id="intro">
-	<div class="container">
-	<img src="images/baker.png" />
-	<div id="content">
-		<h1>Cake Decks</h1>
-		<p>Help Susie Baker decorate cakes by moving them from the kitchen to the decorating tray. Drag and drop each layer until all layers are on the right. You can only stack smaller layers on top of larger layers. Do it in as few moves as possible.</p>
-		<button id="start" onclick="startGame();return false;">Start</button>
-	</div>
-</div>
-</div>
+  <head>
+    <link
+      href="https://fonts.googleapis.com/css?family=Lobster"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Cabin"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <script type="text/javascript" src="js/game-logic.js"></script>
+  </head>
+  <html>
+    <div id="intro">
+      <div class="container">
+        <img src="images/baker.png" />
+        <div id="content">
+          <h1>Cake Decks</h1>
+          <p>
+            Help Susie Baker decorate cakes by moving them from the kitchen to
+            the decorating tray. Drag and drop each layer until all layers are
+            on the right. You can only stack smaller layers on top of larger
+            layers. Do it in as few moves as possible.
+          </p>
+          <button id="start" onclick="startGame();">Start</button>
+        </div>
+      </div>
+    </div>
 
-<div id="gameScreen" class="hidden">
-	<h1>Cake Decks</h1>
+    <div id="gameScreen" class="hidden">
+      <h1>Cake Decks</h1>
 
+      <div id="wrapper">
+        <div class="container">
+          <div id="scoreWrapper">Moves: <span id="scoreText">0</span></div>
 
-<div id="wrapper">
-	<div class="container">
-		<div id="scoreWrapper">Moves: <span id="scoreText">0</span></div>
+          <!-- drag / drop -->
+          <div style="display: flex; justify-content: space-between">
+            <div
+              id="t1"
+              class="tower"
+              data-smallest="0"
+              onclick="checkdraggable(event)"
+              ondrop="drop(event)"
+              ondragover="allowDrop(event)"
+              data-total-elements="3"
+            >
+              <div
+                id="d1"
+                class="disc"
+                dataval="1"
+                draggable="true"
+                ondragstart="drag(event)"
+              >
+                &nbsp;
+              </div>
+              <div
+                id="d2"
+                class="disc"
+                dataval="2"
+                draggable="false"
+                ondragstart="drag(event)"
+              >
+                &nbsp;
+              </div>
+              <div
+                id="d3"
+                class="disc"
+                dataval="3"
+                draggable="false"
+                ondragstart="drag(event)"
+              >
+                &nbsp;
+              </div>
+            </div>
+            <div
+              id="t2"
+              class="tower"
+              data-smallest="0"
+              ondrop="drop(event)"
+              ondragover="allowDrop(event)"
+            ></div>
+            <div
+              id="t3"
+              class="tower"
+              data-smallest="0"
+              ondrop="drop(event)"
+              ondragover="allowDrop(event)"
+            ></div>
+          </div>
+        </div>
 
-		<!-- drag / drop -->
-		<div id="t1" class="tower" data-smallest="0" onclick="checkdraggable(event)" ondrop="drop(event)" ondragover="allowDrop(event)" data-total-elements="3" >
-		<div id="d1" class="disc" dataval="1" draggable="true" ondragstart="drag(event)" >&nbsp;</div>
-	<div id="d2" class="disc" dataval="2" draggable="false" ondragstart="drag(event)" >&nbsp;</div>
-	<div id="d3" class="disc" dataval="3" draggable="false" ondragstart="drag(event)" >&nbsp;</div>
-	</div>
-	<div id="t2" class="tower" data-smallest="0" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
-	<div id="t3" class="tower" data-smallest="0" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+        <div id="helpScreen">
+          <div id="how_to_play" class="content">
+            <h2>How to Play</h2>
+            <p>
+              Drag and drop each layer until all layers are on the right. You
+              can only stack smaller layers on top of larger layers.
+            </p>
+            <button id="continue" onclick="hideHelp();">Continue</button>
+          </div>
 
-	</div>
-	
-	<div id="helpScreen">
-		<div id="how_to_play" class="content">
-			<h2>How to Play</h2>
-			<p>Drag and drop each layer until all layers are on the right. You can only stack smaller layers on top of larger layers.</p>
-			<button id="continue" onclick="hideHelp();return false;">Continue</button>
-		</div>
+          <div id="drag_error" class="content">
+            <h2>Oh No!</h2>
+            <p>You may only move/drag the top most layer of any cake.</p>
+            <button id="continue" onclick="hideHelp();">Continue</button>
+          </div>
 
-		<div id="drag_error" class="content">
-			<h2>Oh No!</h2>
-			<p>You may only move/drag the top most layer of any cake.</p>
-			<button id="continue" onclick="hideHelp();return false;">Continue</button>
-		</div>
+          <div id="drop_error" class="content">
+            <h2>Oh No!</h2>
+            <p>
+              Only a smaller cake layer may be placed upon a larger layer in any
+              cake.
+            </p>
+            <button id="continue" onclick="hideHelp();">Continue</button>
+          </div>
+        </div>
+      </div>
 
-		<div id="drop_error" class="content">
-			<h2>Oh No!</h2>
-			<p>Only a smaller cake layer may be placed upon a larger layer in any cake.</p>
-			<button id="continue" onclick="hideHelp();return false;">Continue</button>
-		</div>
-	</div>		
-</div>
+      <div id="btn-wrapper">
+        <a href="index.html" class="btn">reset</a>
+        <button id="directions" onclick="showHelp('how_to_play');" class="btn">
+          need help?
+        </button>
+      </div>
+    </div>
 
-<div id="btn-wrapper" >
-<a href="index.html" class="btn">reset</a> <a id="directions" href="#" onclick="showHelp('how_to_play'); return false;" class="btn">need help?</a>
-</div>
-</div>
+    <!-- FINAL SCREEN -->
+    <div id="outro" class="hidden">
+      <div class="container">
+        <img src="images/baker.png" />
+        <div id="content">
+          <h1>Great Job</h1>
+          <p>
+            You helped Susie Baker make an amazing cake in
 
-<!-- FINAL SCREEN -->
-<div id="outro" class="hidden">
-	<div class="container">
-	<img src="images/baker.png" />
-	<div id="content">
-		<h1>Great Job</h1>
-		<p>You helped Susie Baker make an amazing cake in 
-
-<span id="scoreTextFinal">###</span>
-moves. </p>
-		<a href="cake-decks.html" class="btn">Play Again</a>
-	</div>
-</div>
-</div>
-</html>
+            <span id="scoreTextFinal">###</span>
+            moves.
+          </p>
+          <a href="index.html" class="btn">Reset</a>
+        </div>
+      </div>
+    </div>
+  </html>
 </body>
