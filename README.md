@@ -1,8 +1,9 @@
-# Cake Decks Puzzle
-Basic javascript programming drag/drop functionality with targeting and ability to set dragability per item.  No libraries used for this logic puzzle. 
+# Cake Decks Logic Puzzle
 
-viewable at http://dev.interfused-inc.com/games/cake-decks/
+Basic javascript programming drag/drop functionality with targeting and ability to set dragability per item.
+
+viewable at https://interfused-inc.com/dev/cake-decks/
 
 On the list of "to dos"
-- Mobile responsiveness.  Currently this is not mobile responsive
-- Flexibility. Ability to add additional dragging discs 
+
+- Flexibility. Ability to add additional dragging discs
